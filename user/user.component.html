@@ -1,0 +1,363 @@
+<app-header></app-header>
+
+
+<div class="container-fluid mt-4">
+  <div class="col-lg-12 mx-auto px-4">
+      <div class="d-flex justify-content-between align-items-baseline">
+
+          <div class="sub_head"><span>//</span>User </div>
+          <div class="d-flex justify-content-between align-items-baseline">
+          <input type="text-username" name="inputSearch" id="inputSearch" class="nosubmit"  placeholder="Search..."[(ngModel)]="searchtext">
+          <button class="btn ms-auto" data-toggle="modal" data-target="#exampleModalUser" (click)="freshAddPage()">Add
+          </button>
+      </div>
+      </div>
+      <div class="grid_bg">
+          <div class="dash">
+              <table class="table table-borderless align-middle ">
+                  <thead>
+                      <tr>
+                          <!-- <th scope="col" [appSort]="userInitData" data-order="desc" data-name="uId">User Id</th> -->
+                          <th scope="col" [appSort]="userInitData" data-order="desc" data-name="username">UserName</th>
+                          <th>Display Name</th>
+                          <th [appSort]="userInitData" data-order="desc" data-name="cora_Id">Stores</th>
+                          <th>Title</th>
+                          <!-- <th>Urid</th> -->
+                          <th>Email</th>
+                          <th>Active</th>
+                          <th>Edit</th>
+                          <th>Delete</th>
+
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let i of userInitData|search:searchtext">
+                          <!-- <td>{{i.uId}}</td> -->
+                          <td>{{i.username}}</td>
+                          <td>{{i.displayname}}</td>
+                          <td>{{changeCora(i.cora_Id)}}</td>
+                          <!-- <td>{{i.cora_Id}}</td> -->
+                          <td>{{i.title}}</td>
+                          <!-- <td>{{i.urId}}</td> -->
+                          <td>{{i.uEmail}}</td>
+                          <td>{{i.uActive}}</td>
+                          <td >
+                            <input type="image" src="assets/images/Edit.png" data-toggle="modal" *ngIf="(userTitle=='super admin' || userTitle=='manager'|| i.username==currentUserName); else elseBlock" data-target=#exampleModalUser (click)="edit(i.uId,i.username)">
+                          </td>
+                          <ng-template #elseBlock>
+
+                            <input type="image" src="assets/images/Edit.png" data-toggle="modal" (click)="edit(i.uId,i.username)" >
+
+
+                          </ng-template>
+                          <td>
+                            <img src="assets/images/Delete.png" class="img-fluid" alt="" id="img" *ngIf="(userTitle=='super admin' || userTitle=='manager'|| i.username==currentUserName); else elseBlock2" (click)="deleteRecord(i)">
+                          </td>
+                          <ng-template #elseBlock2>
+
+                            <img src="assets/images/Delete.png" class="img-fluid" alt="" id="img" (click)="aler()">
+
+
+                          </ng-template>
+                        </tr>
+
+                  </tbody>
+              </table>
+              <div *ngIf="userInitData.length==0">
+                <td></td>
+                <td></td>
+                <td style="text-align:center;font-size:20px;"> NO DATA FOUND</td>
+                <td></td>
+                <td></td>
+
+              </div>
+              <div *ngIf="(userInitData|search:searchtext).length==0">
+                <td></td>
+                <td></td>
+                <td style="text-align:center;font-size:20px;"> NO MATCH FOUND</td>
+                <td></td>
+                <td></td>
+
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+
+
+ <div class="modal fade" id="exampleModalUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header add_sett">
+        <div class="header d-flex align-items-center">
+          <h5 class="m-0 ms-2" >
+              <img src="" alt=""> <span class="slash">//</span>User
+          </h5>
+
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="margin-left:260px;">
+            <span aria-hidden="true" >&times;</span>
+          </button>
+      </div>
+      </div>
+      <div class="modal-body">
+        <div class="add_sett">
+            <div class="cont d-flex flex-column align-items-center justify-content-center">
+                <div class="container-fluid">
+                    <div class="row mb-3 ">
+                        <div class="col-6" *ngIf="!showupdatebutton">
+                            <div class=" form-group set" >
+                                <label>UserName:</label>
+                                <input type="name" class="form-control" placeholder="UserName" [(ngModel)]="username" required #h1="ngModel">
+                            </div>
+                            <div *ngIf="h1.invalid &&h1.touched">
+                              <p style="color:red;text-align:center">Enter Username</p>
+                            </div>
+                        </div>
+                        <div class="col-12" *ngIf="showupdatebutton">
+                          <div class=" form-group set">
+                              <label>UserName:</label>
+                              <input type="name" class="form-control" placeholder="UserName" [(ngModel)]="username" >
+                          </div>
+
+                      </div>
+                      <div class="col-12" *ngIf="showupdatebutton">
+                        <div class=" form-group set">
+                            <label>Display Name:</label>
+
+                            <input type="name" class="form-control" placeholder="Type.." [(ngModel)]="dispname" required #n2="ngModel">
+                        </div>
+                    </div>
+                    <div class="col-6"  *ngIf="!showupdatebutton">
+                      <div class=" form-group set">
+                          <label>Display Name:</label>
+
+                          <input type="name" class="form-control" placeholder="Type.." [(ngModel)]="dispname" required #n2="ngModel" #h2="ngModel">
+                      </div>
+                      <div *ngIf="h2.invalid &&h2.touched">
+                        <p style="color:red;text-align:center">Enter Display name</p>
+                      </div>
+                  </div>
+
+
+                    </div>
+                    <div class="row mb-3 ">
+                      <div class="col-6" *ngIf="!showupdatebutton">
+                        <div class=" form-group set">
+                            <label>Password:</label>
+                            <input type="password" class="form-control" placeholder="Password"  #p1="ngModel" [(ngModel)]="password" required>
+                        </div>
+                        <div *ngIf="p1.invalid &&p1.touched">
+                          <p style="color:red;text-align:center">Enter Password</p>
+                        </div>
+                    </div>
+
+                    <div class="col-6" *ngIf="!showupdatebutton">
+                      <div class=" form-group set">
+                          <label>Confirm Password:</label>
+                          <input type="password" class="form-control" placeholder="Password" [(ngModel)]="confirmpassword" #p2="ngModel" required>
+                      </div>
+                      <div *ngIf="p2.invalid &&p2.touched">
+                        <p style="color:red;text-align:center">Confirm Password</p>
+                      </div>
+                  </div>
+                  <div *ngIf="((password!=confirmpassword)&&(!showupdatebutton)) ">
+                    <p style="color:red">Passwords Not Matched</p>
+                  </div>
+
+
+                  </div>
+
+                    <div class="row mb-3 ">
+
+                        <div class="col-12">
+                            <div class="form-group set">
+                                <label>Stores:</label>
+                                <div *ngIf="!showupdatebutton">
+                                <div  class="d-flex align-items-baseline" id="addInput" *ngFor="let divdata of inputboxes,let i=index" >
+                                    <!-- <input type="name" class="form-control" name="trackingSteps"
+                                      formControlName="stores"> -->
+                                      <select  class="form-select" id=addInput2 (change)="readingdata2($event,i)"  >
+                                        <option >--select--</option>
+                                        <option *ngFor="let val of storesInitdata" value={{val.asCoraAcctId}} >{{val.asLegalentityName}}</option>
+                                      </select>
+                                    <span (click)="Inputremove(divdata,i)" >Remove</span>
+
+
+
+                                </div>
+                                </div>
+                              <div  *ngIf="showupdatebutton">
+                                <div  class="d-flex align-items-baseline" *ngFor="let divdata of inputboxes,let i=index">
+
+                                    <select  class="form-select" id=addInput2 (change)="readingdata2($event,i)" (click)="readPreviousValue($event,i)" >
+                                      <!-- <option>{{editStores[i]}}</option> -->
+                                      <option>{{cora_transform(cora_split[i])}}</option>
+                                      <option *ngFor="let val of storesInitdata" value={{val.asCoraAcctId}}>{{val.asLegalentityName}}</option>
+                                    </select>
+                                  <span (click)="Inputremove(divdata,i)" >Remove</span>
+
+
+                              </div>
+                            </div>
+
+
+                                <h6 class="m-0 ps-3"><span (click)="Inputadd()"><i class="fa-solid fa-circle-plus"></i>Add Stores</span></h6>
+                            </div>
+                        </div>
+
+
+
+                      <!-- <div class="col-12">
+                            <div class=" form-group set" >
+                                <label>Stores:</label>
+                                !-- <div id="dropdownDynamically"></div> ->
+                                <div  id="labelContainer" >
+                                </div>
+                                <div id="itemContainer"  (click)="hello123($event)">
+
+
+                                </div>
+                                <input type="button" value="Click" (click)="addDropDown()" >
+
+
+                                <!-- <select class="form-select" aria-label="" [(ngModel)]="roleid" required >
+
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                 <option value="3">3</option>-
+
+                               </select>-->
+                                <!--   -->
+                            </div>
+                        <!-- </div>
+                    </div> -->
+                    <div class="row mb-3">
+                      <!-- <div class="col-4">
+                        <div class=" form-group set">
+                            <label>Title:</label>
+                            <input type="name" class="form-control" placeholder="Type..." [(ngModel)]="title">
+                        </div>
+                    </div> -->
+                        <div class="col-6">
+                            <div class=" form-group set" >
+                                <label for="">Role :</label >
+                                <select class="form-select" aria-label="" [(ngModel)]="roleid" required #n3="ngModel">
+                                  <option>--Select--</option>
+                                    <option *ngFor="let val of rolesTotal" value={{val.rId}} >{{val.rName}}</option>
+                                    <!-- <option value="2">User</option> -->
+
+
+                                 </select>
+                            </div>
+                        </div>
+
+                        <div class="col-6">
+                            <div class=" form-group set">
+                                <label for="">Active:</label>
+                                <select class="form-select" aria-label="" [(ngModel)]="activestatus" >
+                                    <option value="Y">Active</option>
+                                    <option value="N">InActive</option>
+
+                                 </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="col-12 set">
+                            <label for="" class="form-label">Email:</label>
+                            <input class="form-control" id="email" rows="3" [(ngModel)]="email" #h4="ngModel" required>
+                          </div>
+                          <div *ngIf="h4.invalid &&h4.touched">
+                            <p style="color:red;text-align:center">Email required </p>
+                          </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- <div *ngIf="!showupdatebutton">
+      <div *ngIf="(password!=confirmpassword||password.length==0||confirmpassword.length==0||cora_split.length==0||email.length==0)">
+      <p style="color:red;text-align:center">Please check again </p>
+    </div></div> -->
+
+
+      <div class="modal-footer">
+        <div *ngIf="!showupdatebutton"><button type="button" class="btn btn-primary" (click)="registerUser()" data-dismiss="modal"
+          [disabled]="password!=confirmpassword||password.length==0||confirmpassword.length==0||cora_split.length==0||email.length==0">Submit</button></div>
+       <div *ngIf="showupdatebutton"> <button type="button" class="btn btn-primary" (click)="updateUser(singleUserById.uId)" data-dismiss="modal"
+        [disabled]="cora_split.length==0||email.length==0">Update</button></div>
+       <div *ngIf="showupdatebutton"> <button type="button" class="btn btn-primary" data-toggle="modal" data-dismiss="modal"  data-target="#exampleModalUpdate" (click)="emptyPassword()">Reset Password</button></div>
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <p>data-dismiss="modal"</p> -->
+
+
+<div class="modal fade" id="exampleModalUpdate" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header add_sett">
+        <div class="header d-flex align-items-center">
+
+        <h5 class="m-0 ms-2">
+            <img src="" alt=""> <span class="slash">//</span>PasswordUpdate
+        </h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      </div>
+      <div class="modal-body">
+        <div class="add_sett">
+            <div class="cont d-flex flex-column align-items-center justify-content-center">
+                <div class="container-fluid">
+
+
+                    <div class="row mb-3 ">
+                        <div class="col-12">
+                            <div class=" form-group set">
+                                <label>Display Name:</label>
+
+                                <input type="name" class="form-control" placeholder="Type.." [(ngModel)]="dispname" [disabled]="true" required #n2="ngModel">
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="col-12 set">
+                            <label for="" class="form-label">Enter Password:</label>
+                            <input type="password" class="form-control" id="email" rows="3" [(ngModel)]="password" #n5="ngModel">
+                          </div>
+                    </div>
+                    <div class="row mb-3">
+                      <div class="col-12 set">
+                          <label for="" class="form-label">Confirm Password:</label>
+                          <input type="password" class="form-control" id="email" rows="3" [(ngModel)]="confirmpassword" #n6="ngModel">
+                        </div>
+                  </div>
+                <div>
+                  <div *ngIf="(n5.dirty && n6.dirty) && (password!=confirmpassword)">
+                    <p style="color:red">Password Not matched</p>
+
+                  </div>
+                </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+      <div class="modal-footer">
+        <div><button type="button" class="btn btn-primary" (click)="passwordUpdate()" data-dismiss="modal" [disabled]="password!=confirmpassword||password.length==0||confirmpassword.length==0">Submit</button></div>
+        <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>        -->
+      </div>
+    </div>
+  </div>
+</div>
+
+

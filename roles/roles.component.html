@@ -1,0 +1,147 @@
+<app-header></app-header>
+
+<div class="container-fluid mt-4">
+  <div class="col-lg-12 mx-auto px-4">
+      <div class="d-flex justify-content-between align-items-baseline">
+          <div class="sub_head"><span>//</span> roles </div><button class="btn ms-auto"  data-toggle="modal" data-target="#exampleModalAdd" (click)="setFUN()" >Add
+          </button>
+      </div>
+      <div class="grid_bg">
+          <div class="dash">
+              <table class="table table-borderless align-middle ">
+                  <thead>
+                      <tr>
+                          <!-- <th>Role id</th> -->
+                          <th style="width:calc(100vw/6); text-align:center">Role name</th>
+                          <th  style="width:calc(100vw/6); text-align:center;">Role type</th>
+                          <th  style="width:calc(100vw/6); text-align:center;">Status</th>
+                          <th  style="width:calc(100vw/6); text-align:center;">Timestamp</th>
+                          <th  style="width:calc(100vw/6); text-align:center;">Edit</th>
+                          <th  style="width:calc(100vw/6);  text-align:center;">Delete</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngIf="allRolesFromDB.length==0">
+                      cd
+                      <td></td>
+                      <td></td>
+                      <td style=" text-align:center;font-weight: 400px;text-align:center;font-size:large"><b>NO DATA FOUND</b></td>
+                      <td></td>
+
+
+
+                    </tr>
+                      <tr *ngFor="let i of allRolesFromDB">
+
+
+                          <!-- <td>{{i.rId}}</td> -->
+                          <td>{{i.rName}}</td>
+                          <td>{{i.rType}}</td>
+                          <td>{{i.rStatus}}</td>
+                          <td>{{i.rTs| date:'dd/MM/yyyy'}}</td>
+                          <td><img src="assets/images/Edit.png" class="img-fluid" alt="" data-toggle="modal" data-target="#exampleModalAdd" (click)="setFUN2(i)"
+                                  id="img">
+                          </td>
+                          <!-- <td><img src="assets/images/Edit.png" class="img-fluid" alt="" (click)="EditRow(mymodalEdit,i)"
+                            id="img">
+                    </td> -->
+                          <td><img src="assets/images/Delete.png" class="img-fluid" alt="" (click)="del(i)"
+                                  id="img"></td>
+
+
+                      </tr>
+
+
+
+                  </tbody>
+              </table>
+          </div>
+      </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModalAdd" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header add_sett">
+        <div class="header d-flex align-items-center">
+          <h5 class="m-0 ms-2">
+              <img src="" alt=""> <span class="slash">//</span>Roles
+          </h5>
+          <button type="button" class="close" style="margin-left:220px;" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+      </div>
+      </div>
+      <div class="modal-body">
+        <div class="add_sett">
+            <div class="cont d-flex flex-column align-items-center justify-content-center">
+                <div class="container-fluid">
+                    <div class="row mb-3 ">
+                        <div class="col-12">
+                            <div class=" form-group set">
+                                <label>Name:</label>
+                                <input type="name" class="form-control" placeholder="Type..." #n1="ngModel" [(ngModel)]="Modal2Name" [disabled]="forEdit" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3 ">
+                      <div class="col-6 mt-2">
+                          <div class="from-group set">
+                              <label for="" class="form-label">Type:</label>
+                            <select class="form-select" aria-label="" [(ngModel)]="Modal2Type" required #n2="ngModel">
+                              <!-- <option selected></option> -->
+                              <option value="Admin">Admin</option>
+                             <option value="User">User</option>
+                           </select>
+                          </div>
+                      </div>
+                      <div class="col-6 mt-2">
+                          <div class=" form-group set ">
+                              <label class="form-label">Status:</label>
+                              <select class="form-select" aria-label="" [(ngModel)]="Modal2Status" required #n3="ngModel">
+                                <!-- <option selected></option> -->
+                                <option value="Active">Active</option>
+                               <option value="Inactive">NotActive</option>
+                               <!-- <option value="D">Delete</option> -->
+                             </select>
+                          </div>
+                      </div>
+
+              </div></div>
+          </div>
+      </div>
+  </div>
+  <div *ngIf="actionADD">
+  <div class="col-12 d-flex justify-content-center">
+    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+    <button type="button" class="btn btn-primary mb-4 ml-auto" style="text-align:center" (click)="saveSubmitRoles()" data-dismiss="modal" [disabled]="n1.invalid || (n2.pristine ||n3.pristine )">ADD ROLE</button>
+  </div></div>
+  <div *ngIf="actionEDIT">
+  <div class="col-12 d-flex justify-content-center">
+    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button> -->
+
+    <button type="button" class="btn btn-primary mb-4 ml-auto" style="text-align:center" (click)="UpdateSubmitRoles(dataForEdit.rId)" data-dismiss="modal" [disabled]="(n1.invalid || (n2.pristine ||n3.pristine ))">Update changes</button>
+  </div></div>
+                    <!-- <div class="row mb-3">
+                      (click)="UpdateSubmitRoles(${})"
+                       (change)=TypeSelectedValStatus($event)
+                        <div class="col-12 set">
+                            <label for="" class="form-label">DMS Evidence:</label>
+                            <textarea class="form-control" id="exampleFormControlTextarea1" rows="3" [(ngModel)]="dmsEvidence"></textarea>
+                          </div>
+                    </div> -->
+                    <!-- <div class="row">
+                        <div class="col-12 d-flex justify-content-center">
+                            <div class="btn sub_btn me-2" type="button" >Submit</div>
+                            <div class="btn can_btn ms-2" type="button" >Cancel</div>
+                        </div>
+                    </div>-->
+                </div>
+            </div>
+
+    </div>
+
+

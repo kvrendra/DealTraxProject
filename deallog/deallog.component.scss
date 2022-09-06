@@ -1,0 +1,264 @@
+.sub_head{font-family: 'RobotoCondensed-Regular'; font-size: 1rem; text-transform: uppercase; margin: 2.5rem 0 1.5rem 2rem; color: #000;
+    span{color: #2190fe;}
+    }
+.grid_bg{background: #fff; padding:0 0 0 1rem;}
+
+.deallog{ font-family: 'RobotoCondensed-Regular';background: #fff;   max-height: calc(100vh - 180px);
+   overflow: auto; text-align: center;
+  .dropdown-menu{min-width: auto !important; margin-left: -8px !important;}
+  .dropdown{
+    button{
+    display: flex;
+    border: none;
+    background: transparent;
+    color: black;
+    font-family: 'RobotoCondensed-Bold';
+    padding: 0px;
+    margin: 0px;
+    font-size: 0.7rem;
+    }
+.dropdown-item{
+    color: rgb(0, 0, 0);
+    font-size: 0.7rem;
+    font-family: 'RobotoCondensed-Regular';
+}
+}
+.dropdown-toggle::after {
+    border: none;
+    font-family: "Font Awesome 6 Free";
+    font-weight: 900;
+    font-size: .6rem;
+    content: "\f078";
+    vertical-align: 0;
+    float: right;
+    padding-left: 2px;
+    color: #33b3f3;
+    margin-top: 2px;
+}
+
+  table{
+    white-space: nowrap; font-family: 'RobotoCondensed-Regular'; border-spacing:0 !important;
+
+    table, td, th {border-collapse: collapse;font-size: 0.7rem;}
+    th {font-family: 'RobotoCondensed-Bold';padding:5px 16px;}
+    td {font-family: 'RobotoCondensed-Regular';padding:5px 16px;}
+    thead {background: #ffffff;position: sticky;z-index: 9 ;top:0;box-shadow: inset 0 -2px 0 #2d91f1;
+    tr:first-child{color: #33b3f3 !important;}
+    tr:last-child th:nth-child(-n+3){box-shadow: inset 0 -2px 0 #2d91f1;}
+    tr th:nth-child(1){position: sticky;z-index: 5;left: 0;background: #ffffff;}
+    tr th:nth-child(2){position: sticky;z-index: 5;left: 60px;background: #ffffff;}
+    tr th:nth-child(3){position: sticky;z-index: 5;left: 136px;background: #ffffff;}
+    tr:nth-child(1) th:not(n){padding-bottom: 0px !important;font-size: .7rem;}
+    tr:nth-child(2) th:not(n){padding-bottom: 10px;color: #000;font-size: .7rem;}
+    }
+
+    tbody{
+    tr:nth-child(odd){background: #ffffff;}
+    tr:nth-child(even){background: #f3f6fb;}
+    tr td:nth-child(1) {position: sticky;z-index: 5;left: 0;}
+    tr td:nth-child(2) {position: sticky;z-index: 5;left: 60px;}
+    tr td:nth-child(3) {position: sticky;z-index: 5;left: 136px;}
+    tr:nth-child(odd) td:nth-child(-n+3) {background: #ffffff;}
+    tr:nth-child(even) td:nth-child(-n+3) {background: #f3f6fb;}
+    tr td:nth-child(4) {border-right: 1px solid #ccc;}
+    tr td:nth-child(6) {border-right: 1px solid #ccc;}
+    .red-bg td:not(:nth-child(1)):not(:nth-child(2)){background: #e20030 !important;color: #ffffff;}
+    }
+}
+
+}
+
+
+// table {
+//   border-collapse: collapse;
+//   color: lightgrey;
+//   table-layout: fixed;
+// }
+
+// thead {
+//   // thead and tr don't currently support sticky
+//   // position: -webkit-sticky;
+//   // position: sticky;
+//   // left: 0; top: 0;
+
+//   th {
+//     position: -webkit-sticky; // for safari
+//     position: sticky;
+//     top: 0; left: 0;
+
+
+//     &:first-child {
+//       z-index: 3;
+//     }
+//   }
+// }
+
+// th, td {
+//   padding: 10px 100px;
+//   text-transform: capitalize;
+// }
+
+// th {
+//   background: black;
+//   color: white;
+//   white-space: nowrap;
+// }
+
+// tr {
+//   background: hsl(0, 0%, 20%);
+
+//   &:nth-child(even) {
+//     background: hsl(0, 0%, 15%);
+//   }
+
+//   &:not(:last-of-type) {
+//     border-bottom: 2px solid rgba(yellow, 0.25);
+//   }
+// }
+
+// th, td {
+//   &:first-child {
+//     position: -webkit-sticky; // for safari
+//     position: sticky;
+//     left: 0px;
+//     // top: 0px; -> doesn't work in Safari 11
+//     /*
+//       thanks to https://github.com/jonjohnjohnson
+//       explanation: https://github.com/w3c/csswg-drafts/issues/865
+//     */
+//     z-index: 2;
+
+//   }
+// }
+
+// td:first-child {
+//   tr:nth-child(odd) & {
+//     background: hsl(0, 0%, 20%);
+//     box-shadow: inset -2px 0px rgba(black, 0.25);
+//   }
+
+//   tr:nth-child(even) & {
+//     background: hsl(0, 0%, 15%);
+//     box-shadow: inset -2px 0px rgba(black, 0.25);
+//   }
+// }
+.message-mail-popup{
+  width: 40%;
+  .header{
+  background: #ffffff;
+  // border-radius: 20px 20px 0px 0px;
+  border: 2px solid #edf1f4;
+  position: relative;
+  // padding: 0.7rem 2rem;
+  .close-btn{
+      color: #d4d4d4;
+      font-size: 1.2vw;
+      position: absolute;
+      right: 20px;
+  }
+  .title{
+      font-family: 'Gotham\ Bold';
+      font-size: 1vw;
+      color: #444649;
+      line-height: 2rem;
+  .slash{
+  color: #33b3f3;
+  padding-right: 5px;
+          }
+      }}
+  .body{
+  background:#f8f9fb;
+  border-radius:0px 0px 20px 20px;
+  background-color: #f5f9f7;
+  padding: 2rem 4rem;
+  span{
+      a {
+      text-decoration: none;
+      font-size: 0.8vw;
+      font-family: 'Gotham\ Book\ Regular';
+      color: #33b3f3;
+  }
+  }
+  .fa-paperclip{
+  transform: scaleX(-1);
+  color: #33b3f3;
+  padding-left: 5px;
+  font-size: 1.3rem;
+  }
+  .fa-pencil-square-o{
+  color: #33b3f3;
+  padding-right: 5px;
+  font-size: 1.3rem;
+  }
+  .form-group{
+      position:relative;
+  input {
+      background: #ffffff;
+      border: 2px solid #eeeff1;
+      border-radius: 50px;
+      font-size: 0.78vw;
+      font-family: 'Gotham\ Medium\ Regular';
+      color: black;
+      padding: 7px 100px;
+      line-height: 20px;
+      text-align: start;
+      }
+      ::placeholder {
+      color: #757575;
+      text-align: start;
+      font-family: 'Gotham\ Medium\ Regular';
+      font-size: 0.78vw;
+  }
+  .static-value{
+      position:absolute;
+      left:20px;
+      font-weight:bold;
+      font-size:0.78vw;
+      color:#444;
+      top:9px;
+      font-family: 'Gotham\ Bold';
+  }
+}
+textarea{
+  border-radius: 15px;
+  padding: 10px;
+  resize: none;
+  font-size: 0.7vw;
+  font-family: 'Gotham\ Medium\ Regular';
+  color: black;
+}
+  h6{
+      font-size: 1vw;
+      color: #6a6c70;
+      font-family: 'Gotham\ Book\ Regular';
+  }
+    button{
+        border-radius: 25px;
+        width: 200px;
+        background-color:#2a91f1;
+        color: white;
+        font-family: 'Gotham\ Book\ Regular';
+        font-size: 0.75vw;
+        border: none;
+    }
+    .cancel-txt{
+      display: flex;
+      a{
+          text-decoration: none;
+          font-family: 'Gotham\ Book\ Regular';
+          font-size: 0.9vw;
+          color: #33b3f3;
+      }
+    }
+   }
+}
+@media (max-width: 1379px) {
+  .header{padding: 0.2rem 1rem !important;}
+  .body{padding:1rem 3rem !important;
+  .mt-3 {margin-top: 0.7rem!important;}
+  .mt-4 {margin-top: 1rem!important; margin-bottom: 1rem !important;}
+  .fa{font-size: 1rem !important; }
+  input {line-height: 10px !important;padding: 8px 80px !important;}
+  h6{font-size: 1vw;}
+  button{ width: 150px !important;}}
+}
