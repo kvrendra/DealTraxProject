@@ -55,7 +55,7 @@
         <div class="icons me-auto">
           <img src="assets/images/Action.png" class="img-fluid" alt="">
           <span >
-            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalMessageDisplay">
+            <button type="button" class="btn" data-toggle="modal" data-target="#exampleModalMessageDisplay" (click)="msgPop()">
             <img src="assets/images/Chat.png" class="img-fluid" alt="">
             <span style="color:red">{{msg.length}}</span>
             </button>
@@ -102,39 +102,207 @@
       </div>
       </div>
 
-      <div class="modal-body">
-        <div class="add_sett">
-            <div class="cont d-flex flex-column align-items-center justify-content-center">
-                <div class="container-fluid">
-                <div class="row mb-3">
-                  <div class="col-12 set">
-                    <h2>Message Display  Body </h2>
-                    <div *ngFor="let item of individualMsgs">
-                      {{item.mBody}}
 
+
+
+      <!-- <div class="container-fluid mt-4"> -->
+        <div class="col-lg-12 mx-auto px-4"  *ngIf="!msgDisplay" >
+            <!-- <div class="sub_head"><span>//</span>Messages</div> -->
+            <div class="grid_bg">
+            <div class="deallog">
+                <table class="col-12">
+                  <thead class="col-12">
+                    <tr>
+                      <th class="col-4">
+                        From
+
+                      </th>
+                      <th>
+                          Subject
+                      </th>
+                      <th>
+                        Action
+                      </th>
+                      <th>
+                        Delete
+                      </th>
+                    </tr>
+
+                  </thead>
+                    <tbody>
+                       <tr *ngFor="let i of msg,let j=index">
+
+                        <td *ngIf="i.mStatus!='D'">{{changeFrom(i.mFrom)}}</td>
+                        <td *ngIf="i.mStatus!='D'">{{i.mSubject}}</td>
+                        <td *ngIf="(i.mStatus=='U'&& i.mStatus!='D')" > <button class="btn btn-danger" (click)="viewMsg(i)">View</button></td>
+                        <td *ngIf="(i.mStatus=='R'&& i.mStatus!='D')"  > <button class="btn btn-success" (click)="viewMsg(i)">View</button></td>
+                       <!-- <td *ngIf="i.mTo!=userDetails"> <button class="btn btn-primary" (click)="viewMsg(i)">View</button></td> -->
+                        <td  *ngIf="i.mStatus!='D'"> <button class="btn btn-danger" (click)="DeleteMsg(i)">Delete</button></td>
+                        
+                        
+
+
+                    </tr>
+                    <!-- <tr>
+                      <td>InterPolate From</td>
+                      <td>Subject data</td>
+                      <td> <button class="btn btn-primary">View</button></td>
+                    </tr> -->
+                    </tbody>
+
+
+                    </table>
+
+            </div>
+        </div>
+        </div>
+
+        <!-- <div class="modal-body"  *ngIf="msgDisplay">
+          <div class="add_sett">
+              <div class="cont d-flex flex-column align-items-center justify-content-center">
+                  <div class="container-fluid">
+
+
+                  <div class="row mb-3">
+                    <div class="col-12 set">
+                      <h4 style="color:blue">Message: </h4>
+                      <div class="col-12">
+                          <h4 style="color:coral"><label>From:</label>{{changeFrom(individualMsgs.mFrom)}}</h4>
+                      </div>
+
+                      <div class="col-12">
+                       <h4 style="color:darkolivegreen"> <label>Body:</label>{{individualMsgs.mBody}}</h4>
+                       </div>
+                      <!-- <div *ngFor="let item of individualMsgs"> --
+                        <!-- {{individualMsgs.mBody}} -->
+
+                      <!-- </div> --
+
+                    </div>
+
+
+                  </div>
+
+
+                  </div>
+
+                  <div class="row mb-3">
+                    <div class="col-12">
+                      <button type="button" class="btn btn-secondary ml-3" data-dismiss="modal">Cancel</button>
                     </div>
 
                   </div>
 
 
+              </div>
+          </div>
+        </div> -->
+        <!-- /////Change the modal to same as message sending template -->
+        <div class="modal-body"  *ngIf="msgDisplay">
+          <div class="add_sett">
+              <div class="cont d-flex flex-column align-items-center justify-content-center">
+                  <div class="container-fluid">
+                    <!-- <div class="col-12 text-end">
+                      <div class="d-flex justify-content-end align-items-center mb-3 mt-3 mr-3">
+                          <span class="d-flex align-items-end" (click)="selectFile($event)">
+                            <input type="file" style="display:none" (change)="selectFile($event)" #input >
+         <button type="button"style="background-color:darkblue;color:white">Browse</button> --
+        <a (click)="input.click()"> <i   class="fa fa-paperclip" aria-hidden="true"></i>Attach</a></span>
+                          <span class="d-flex align-items-end ps-4 pe-2"><a ><img src="../../assets/images/edit_gry.png" alt="" class="img-fluid">Create Action</a></span>
+                      </div>
+                   </div> -->
+
+
+                      <div class="row mb-3 ">
+                          <div class="col-12">
+                              <div class=" form-group set">
+                                 
+                                  <div class="row mb-3">
+                                    <div class="col-12 set">
+                                        <label for="" class="form-label">To:</label>
+                                        <input type="text" class="form-control"  [disabled]="true" value={{changeFrom(individualMsgs.mTo)}}>
+                                      </div>
+                                </div>
+            
+                              </div>
+                          </div>
+
+                      </div>
+
+                      <div class="row mb-3">
+                        <div class="col-12 set">
+                            <label for="" class="form-label">CC:</label>
+                            <input type="text" class="form-control"  [disabled]="true" value={{changeFrom(individualMsgs.mCc)}}>
+                          </div>
+                    </div>
+
+                      <div class="row mb-3">
+                        <div class="col-12 set">
+                            <label for="" class="form-label">Bcc:</label>
+                            <input type="text" class="form-control"  [disabled]="true" value={{changeFrom(individualMsgs.mBcc)}}>
+                          </div>
+                    </div>
+
+                  <div class="row mb-3">
+                    <div class="col-12 set">
+                        <label for="" class="form-label">Subject:</label>
+                        <input type="text" class="form-control"  [disabled]="true" value={{individualMsgs.mSubject}}>
+                      </div>
                 </div>
-
-
-                </div>
-
                 <div class="row mb-3">
-                  <div class="col-12">
-                    <button type="button" class="btn btn-secondary ml-3" data-dismiss="modal">Cancel</button>
-                  </div>
+                  <div class="col-12 set">
 
-                </div>
-
-
+                      <textarea  [disabled]="true" class="form-control" id="exampleFormControlTextarea1" rows="3" value={{individualMsgs.mBody}}></textarea>
+                    </div>
               </div>
 
+                  </div>
+              </div>
+          </div>
+      </div>
+    <!-- </div> -->
 
-                </div>
-            </div>
+
+      <!-- <div class="col-12 grid_bg">
+        <table>
+          <thead>
+            <tr>
+              <th class="col-4">
+                From
+
+              </th>
+              <th>
+                  Subject
+              </th>
+              <th>
+                Action
+              </th>
+            </tr>
+
+          </thead>
+          <tbody>
+            <tr>
+              <td>InterPolate From</td>
+              <td>Subject data</td>
+              <td> <button class="btn btn-primary">View</button></td>
+            </tr>
+          </tbody>
+
+
+
+
+        </table>
+
+      </div> -->
+
+
+
+
+
+
+
+
+
         </div>
     </div>
 

@@ -74,6 +74,7 @@ export class UserComponent implements OnInit {
   })
 
     this.uSer.gettingUsersData().subscribe((data)=>{
+      console.log('users initial data',data)
 
       this.userInitData=data
 
